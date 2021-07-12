@@ -1,4 +1,4 @@
-library imepay_plugin;
+library imepay;
 
 export 'src/imepay.dart';
 export 'src/imepay_enum.dart';
