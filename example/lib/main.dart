@@ -19,12 +19,12 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     _merchantInfo = MerchantInfo(
-      code: 'CODE',
-      name: 'NAME',
-      recordingUrl: 'CALL_BACK_URL',
-      module: 'MODULE',
-      username: 'username',
-      password: 'password',
+      code: 'JEEVEE',
+      name: 'jeeveehealth',
+      recordingUrl: 'https://devapi.jvtests.com/v1/payments/records',
+      module: 'JEEVEE',
+      username: 'Jeevee',
+      password: 'IME1234',
     );
   }
 
@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
               _imepay = Imepay(
                 merchantInfo: _merchantInfo,
                 amount: '200.0',
-                referenceId: 'Test',
+                referenceId: 'hello world',
                 environment: ImepayEnvironment.test,
               );
               var response = await _imepay.makePayment();

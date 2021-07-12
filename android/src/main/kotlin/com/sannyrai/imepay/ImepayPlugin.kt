@@ -14,22 +14,30 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
 /** ImepayPlugin */
-public class ImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
+class ImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     private lateinit var channel: MethodChannel
     private lateinit var activity: Activity
 
-    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "imepay")
-        channel.setMethodCallHandler(this)
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        activity = binding.activity
     }
 
-    companion object {
-        @JvmStatic
-        fun registerWith(registrar: Registrar) {
-            val channel = MethodChannel(registrar.messenger(), "imepay")
-            channel.setMethodCallHandler(ImepayPlugin())
-        }
+    override fun onDetachedFromActivityForConfigChanges() {
+        TODO("Not yet implemented")
+    }
+
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDetachedFromActivity() {
+        activity.finish()
+    }
+
+    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "imepay_plugin")
+        channel.setMethodCallHandler(this)
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -51,16 +59,21 @@ public class ImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 val price = paymentInfo["amount"] as String
                 val referenceId = paymentInfo["referenceId"] as String
 
-                val imePayment: IMEPayment
-
-                imePayment = if (environment == "live") {
+                val imePayment: IMEPayment = if (environment == "live") {
                     IMEPayment(activity, ENVIRONMENT.LIVE)
                 } else {
                     IMEPayment(activity, ENVIRONMENT.TEST)
                 }
 
                 imePayment.performPayment(
-                        merchantCode, merchantName, recordingUrl, price, referenceId, module, username, password
+                    merchantCode,
+                    merchantName,
+                    recordingUrl,
+                    price,
+                    referenceId,
+                    module,
+                    username,
+                    password
                 ) { responseCode, responseDescription, transactionId, msisdn, amount, refId ->
                     val paymentResponse: HashMap<String, String> = HashMap()
                     when (responseCode) {
@@ -92,21 +105,4 @@ public class ImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
     }
-
-    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        this.activity = binding.activity
-    }
-
-    override fun onDetachedFromActivityForConfigChanges() {
-
-    }
-
-    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-
-    }
-
-    override fun onDetachedFromActivity() {
-
-    }
-
 }

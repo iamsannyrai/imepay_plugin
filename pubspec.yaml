@@ -28,7 +28,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.pideals.imepay
+        package: com.sannyrai.imepay
         pluginClass: ImepayPlugin
       ios:
         pluginClass: ImepayPlugin

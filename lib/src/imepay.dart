@@ -8,7 +8,7 @@ import 'package:imepay/src/merchant_info.dart';
 import 'imepay_enum.dart';
 
 class Imepay {
-  static const MethodChannel _channel = const MethodChannel('imepay');
+  static const MethodChannel _channel = const MethodChannel('imepay_plugin');
 
   final String _amount, _referenceId;
   final MerchantInfo _merchantInfo;
@@ -38,6 +38,7 @@ class Imepay {
         "username": _merchantInfo.username,
         "password": _merchantInfo.password,
         "environment": describeEnum(_environment),
+        "referenceId":_referenceId,
       };
 
       Map<String, dynamic> paymentInfo = {
