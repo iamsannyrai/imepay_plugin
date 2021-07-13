@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:imepay/imepay.dart';
 
 void main() {
@@ -43,14 +44,18 @@ class _MyAppState extends State<MyApp> {
               style: TextStyle(color: Colors.white),
             ),
             onPressed: () async {
-              _imepay = Imepay(
-                merchantInfo: _merchantInfo,
-                amount: '200.0',
-                referenceId: 'hello world',
-                environment: ImepayEnvironment.test,
-              );
-              var response = await _imepay.makePayment();
-              print('Response is $response');
+              try {
+                _imepay = Imepay(
+                  merchantInfo: _merchantInfo,
+                  amount: '200.0',
+                  referenceId: 'hello world',
+                  environment: ImepayEnvironment.test,
+                );
+                var response = await _imepay.makePayment();
+                print('response is $response');
+              } catch (e) {
+                print(e);
+              }
             },
           ),
         ),

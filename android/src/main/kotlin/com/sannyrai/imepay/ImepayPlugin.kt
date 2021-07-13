@@ -1,6 +1,7 @@
 package com.sannyrai.imepay
 
 import android.app.Activity
+import android.util.Log
 import androidx.annotation.NonNull
 import com.swifttechnology.imepaysdk.ENVIRONMENT
 import com.swifttechnology.imepaysdk.IMEPayment
@@ -18,6 +19,7 @@ class ImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     private lateinit var channel: MethodChannel
     private lateinit var activity: Activity
+    private lateinit var imePayment: IMEPayment
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         activity = binding.activity
@@ -59,7 +61,7 @@ class ImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                 val price = paymentInfo["amount"] as String
                 val referenceId = paymentInfo["referenceId"] as String
 
-                val imePayment: IMEPayment = if (environment == "live") {
+                imePayment = if (environment == "live") {
                     IMEPayment(activity, ENVIRONMENT.LIVE)
                 } else {
                     IMEPayment(activity, ENVIRONMENT.TEST)
@@ -79,7 +81,7 @@ class ImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     when (responseCode) {
                         // Transaction was successfully executed and verified
                         100 -> {
-                            paymentResponse["responseCode"] = "100"
+                            paymentResponse["responseCode"] = responseCode.toString()
                             paymentResponse["responseDescription"] = responseDescription!!
                             paymentResponse["transactionId"] = transactionId!!
                             paymentResponse["msisdn"] = msisdn!!
@@ -89,10 +91,13 @@ class ImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                         // Transaction request was successfully sent, but could not get verified. 
                         // The customer executing the payment will get an SMS for the confirmation.
                         101 -> {
-                            paymentResponse["responseCode"] = "101"
+                            paymentResponse["responseCode"] = responseCode.toString()
                             paymentResponse["refId"] = refId!!
                         }
                     }
+
+                    Log.d("paymentResponse", "$paymentResponse");
+
                     result.success(paymentResponse)
                 }
             }

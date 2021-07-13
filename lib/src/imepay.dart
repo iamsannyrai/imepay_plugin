@@ -45,8 +45,10 @@ class Imepay {
         "amount": _amount,
         "referenceId": _referenceId,
       };
-      Map<String, dynamic> paymentResponse = await _channel
+      var paymentResponse = await _channel
           .invokeMethod('payWithIME', [merchantInfo, paymentInfo]);
+
+      print('payment response is $paymentResponse');
 
       return paymentResponse;
     } on PlatformException catch (e) {
