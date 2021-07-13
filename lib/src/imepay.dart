@@ -48,7 +48,8 @@ class Imepay {
       };
       final paymentResponse = await _channel
           .invokeMethod('payWithIME', [merchantInfo, paymentInfo]);
-      final imePaymentResponse = imePaymentResponseFromJson(paymentResponse);
+      final imePaymentResponse = ImePaymentResponse.fromJson(
+          Map<String, dynamic>.from(paymentResponse));
       print('ime payment response is $imePaymentResponse');
 
       return imePaymentResponse;
