@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:imepay/src/merchant_info.dart';
+import 'package:imepay/src/payment_response.dart';
 
 import 'imepay_enum.dart';
 
@@ -28,7 +29,7 @@ class Imepay {
         _referenceId = referenceId,
         _environment = environment;
 
-  Future<dynamic> makePayment() async {
+  Future<ImePaymentResponse> makePayment() async {
     try {
       Map<String, String> merchantInfo = {
         "merchantCode": _merchantInfo.code,
@@ -38,19 +39,19 @@ class Imepay {
         "username": _merchantInfo.username,
         "password": _merchantInfo.password,
         "environment": describeEnum(_environment),
-        "referenceId":_referenceId,
+        "referenceId": _referenceId,
       };
 
       Map<String, dynamic> paymentInfo = {
         "amount": _amount,
         "referenceId": _referenceId,
       };
-      var paymentResponse = await _channel
+      final paymentResponse = await _channel
           .invokeMethod('payWithIME', [merchantInfo, paymentInfo]);
+      final imePaymentResponse = imePaymentResponseFromJson(paymentResponse);
+      print('ime payment response is $imePaymentResponse');
 
-      print('payment response is $paymentResponse');
-
-      return paymentResponse;
+      return imePaymentResponse;
     } on PlatformException catch (e) {
       throw e;
     }
