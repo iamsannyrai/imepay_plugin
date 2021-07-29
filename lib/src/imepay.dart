@@ -29,7 +29,10 @@ class Imepay {
         _referenceId = referenceId,
         _environment = environment;
 
-  Future<ImePaymentResponse> makePayment() async {
+  Future<void> makePayment({
+    @required Function(ImePaymentResponse) onSuccess,
+    @required Function(String) onFailure,
+  }) async {
     try {
       Map<String, String> merchantInfo = {
         "merchantCode": _merchantInfo.code,
@@ -46,13 +49,21 @@ class Imepay {
         "amount": _amount,
         "referenceId": _referenceId,
       };
-      final paymentResponse = await _channel
-          .invokeMethod('payWithIME', [merchantInfo, paymentInfo]);
-      final imePaymentResponse = ImePaymentResponse.fromJson(
-          Map<String, dynamic>.from(paymentResponse));
-      print('ime payment response is $imePaymentResponse');
+      _channel.invokeMethod('payWithIME', [merchantInfo, paymentInfo]);
 
-      return imePaymentResponse;
+      _channel.setMethodCallHandler((call) async {
+        switch (call.method) {
+          case "onSuccess":
+            final imePaymentResponse = ImePaymentResponse.fromJson(
+                Map<String, dynamic>.from(call.arguments));
+            onSuccess(imePaymentResponse);
+            break;
+
+          case "onFailure":
+            onFailure(call.arguments);
+            break;
+        }
+      });
     } on PlatformException catch (e) {
       throw e;
     }

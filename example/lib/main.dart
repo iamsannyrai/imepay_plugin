@@ -51,8 +51,7 @@ class _MyAppState extends State<MyApp> {
                   referenceId: 'hello world',
                   environment: ImepayEnvironment.test,
                 );
-                var response = await _imepay.makePayment();
-                print('response is $response');
+                _imepay.makePayment();
               } catch (e) {
                 print(e);
               }
