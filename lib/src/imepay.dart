@@ -52,6 +52,7 @@ class Imepay {
       _channel.invokeMethod('payWithIME', [merchantInfo, paymentInfo]);
 
       _channel.setMethodCallHandler((call) async {
+        print("call.arguments: ${call.arguments}");
         switch (call.method) {
           case "onSuccess":
             final imePaymentResponse = ImePaymentResponse.fromJson(
