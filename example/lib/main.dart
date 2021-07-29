@@ -20,12 +20,12 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     _merchantInfo = MerchantInfo(
-      code: 'code',
-      name: 'name',
-      recordingUrl: 'callback url',
-      module: 'module',
-      username: 'module',
-      password: 'password',
+      code: 'JEEVEE',
+      name: 'jeeveehealth',
+      recordingUrl: 'https://devapi.jvtests.com/v1/payments/records',
+      module: 'JEEVEE',
+      username: 'Jeevee',
+      password: 'IME1234',
     );
   }
 
