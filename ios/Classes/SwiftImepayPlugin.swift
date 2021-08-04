@@ -2,8 +2,11 @@ import Flutter
 import UIKit
 
 public class SwiftImepayPlugin: NSObject, FlutterPlugin {
+
+  public var channel:FlutterMethodChannel
+
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "imepay", binaryMessenger: registrar.messenger())
+    channel = FlutterMethodChannel(name: "imepay", binaryMessenger: registrar.messenger())
     let instance = SwiftImepayPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
@@ -43,18 +46,21 @@ public class SwiftImepayPlugin: NSObject, FlutterPlugin {
                 paymentResponse["msisdn"] = transactionInfo.customerMsisdn
                 paymentResponse["amount"] = transactionInfo.amount
                 paymentResponse["refId"] = transactionInfo.referenceId
+
+                channel.invokeMethod("onSuccess", paymentResponse)
+
             } else if transactionInfo.responseCode == 101 {
                 paymentResponse["responseCode"] = String(101)
                 paymentResponse["refId"] = transactionInfo.referenceId
+                paymentResponse["responseDescription"] = "Transaction Failed"
+                channel.invokeMethod("onFailure", paymentResponse)
             }
-
-            result(paymentResponse)
-
         }, failure: { (transactionInfo, errorMessage) in
-            result(FlutterError(code:"-1", message: "error making payment", details: nil))
+            let paymentResponse: [String: String] = [:]
+            paymentResponse["refId"] = transactionInfo?.referenceId
+            paymentResponse["responseDescription"] = errorMessage
+            channel.invokeMethod("onFailure", paymentResponse)
         })
-    } else {
-        result(FlutterError(code:"-1", message: "method not implemented", details: nil))
     }
   }
 }

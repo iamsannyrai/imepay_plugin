@@ -81,7 +81,6 @@ class ImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                     when (responseCode) {
                         // Transaction was successfully executed and verified
                         100 -> {
-                            print("100 failed")
                             paymentResponse["responseCode"] = responseCode.toString()
                             paymentResponse["responseDescription"] = responseDescription!!
                             paymentResponse["transactionId"] = transactionId!!
@@ -94,15 +93,13 @@ class ImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
                         // Transaction request was successfully sent, but could not get verified. 
                         // The customer executing the payment will get an SMS for the confirmation.
                         101 -> {
-                            print("101 failed")
                             paymentResponse["responseCode"] = responseCode.toString()
                             paymentResponse["refId"] = refId!!
                             channel.invokeMethod("onFailure", paymentResponse)
                         }
                     }
-                    print("response is $paymentResponse")
-                    result.success(paymentResponse)
                 }
+                result.success(true);
             }
             else -> {
                 result.notImplemented()
