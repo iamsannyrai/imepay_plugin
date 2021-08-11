@@ -1,5 +1,6 @@
 import Flutter
 import UIKit
+import IMEPay
 
 public class SwiftImepayPlugin: NSObject, FlutterPlugin {
 
