@@ -1,4 +1,4 @@
-name: imepay
+name: imepay_flutter
 description: Imepay plugin for flutter
 version: 0.0.1
 author:
@@ -28,7 +28,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.sannyrai.imepay
+        package: com.sannyrai.imepay_flutter
         pluginClass: ImepayPlugin
       ios:
         pluginClass: ImepayPlugin

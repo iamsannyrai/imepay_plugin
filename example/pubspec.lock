@@ -67,7 +67,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  imepay:
+  imepay_flutter:
     dependency: "direct main"
     description:
       path: ".."

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:imepay/imepay.dart';
+import 'package:imepay_flutter/imepay_flutter.dart';
 
 void main() {
   runApp(MyApp());

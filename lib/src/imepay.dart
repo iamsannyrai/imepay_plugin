@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:imepay/src/merchant_info.dart';
-import 'package:imepay/src/payment_response.dart';
+import 'package:imepay_flutter/src/merchant_info.dart';
+import 'package:imepay_flutter/src/payment_response.dart';
 
 import 'imepay_enum.dart';
 

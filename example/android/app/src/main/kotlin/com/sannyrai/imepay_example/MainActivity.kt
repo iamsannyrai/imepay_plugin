@@ -1,4 +1,4 @@
-package com.sannyrai.imepay_example
+package com.sannyrai.imepay_flutter_example
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,4 +1,4 @@
-package com.sannyrai.imepay
+package com.sannyrai.imepay_flutter
 
 import android.app.Activity
 import android.util.Log

@@ -3,7 +3,7 @@
 # Run `pod lib lint imepay.podspec' to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'imepay'
+  s.name             = 'imepay_flutter'
   s.version          = '0.0.1'
   s.summary          = 'Imepay plugin for flutter'
   s.description      = <<-DESC
