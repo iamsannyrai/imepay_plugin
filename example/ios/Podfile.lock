@@ -1,0 +1,48 @@
+PODS:
+  - AFNetworking-No-UIKit (3.2.1):
+    - AFNetworking-No-UIKit/NSURLSession (= 3.2.1)
+    - AFNetworking-No-UIKit/Reachability (= 3.2.1)
+    - AFNetworking-No-UIKit/Security (= 3.2.1)
+    - AFNetworking-No-UIKit/Serialization (= 3.2.1)
+  - AFNetworking-No-UIKit/NSURLSession (3.2.1):
+    - AFNetworking-No-UIKit/Reachability
+    - AFNetworking-No-UIKit/Security
+    - AFNetworking-No-UIKit/Serialization
+  - AFNetworking-No-UIKit/Reachability (3.2.1)
+  - AFNetworking-No-UIKit/Security (3.2.1)
+  - AFNetworking-No-UIKit/Serialization (3.2.1)
+  - Flutter (1.0.0)
+  - flutter_imepay (0.0.1):
+    - Flutter
+    - IMEPay
+  - IMEPay (1.2.2):
+    - AFNetworking-No-UIKit (~> 3.2.1)
+    - SVProgressHUD (~> 2.1.2)
+  - SVProgressHUD (2.1.2)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_imepay (from `.symlinks/plugins/flutter_imepay/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking-No-UIKit
+    - IMEPay
+    - SVProgressHUD
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_imepay:
+    :path: ".symlinks/plugins/flutter_imepay/ios"
+
+SPEC CHECKSUMS:
+  AFNetworking-No-UIKit: b0107a759674abb21253b46e18f4e462b2370fb7
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  flutter_imepay: 20e84e46b9e02a0d467b8c65e76eb6789441b02f
+  IMEPay: 2890da7c33d663d80acbbbfc14b9ac09437c234c
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.10.0
