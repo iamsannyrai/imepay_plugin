@@ -1,0 +1,1 @@
+enum ImepayEnvironment { live, test }
