@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import '../flutter_imepay.dart';
 
 class FlutterImepay {
-  static const MethodChannel _channel = const MethodChannel('imepay_plugin');
+  static const MethodChannel _channel = const MethodChannel('flutter_imepay');
 
   final String _amount, _referenceId;
   final MerchantInfo _merchantInfo;
