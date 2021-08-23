@@ -36,7 +36,7 @@ class FlutterImepayPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_imepay")
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "com.sannyrai.flutter_imepay")
         channel.setMethodCallHandler(this)
     }
 
