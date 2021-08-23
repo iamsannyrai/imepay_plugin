@@ -15,7 +15,7 @@ public class SwiftFlutterImepayPlugin: NSObject, FlutterPlugin {
   }
 
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "imepay_plugin", binaryMessenger: registrar.messenger())
+    let channel = FlutterMethodChannel(name: "flutter_imepay", binaryMessenger: registrar.messenger())
     
     let instance = SwiftFlutterImepayPlugin(channel: channel)
     registrar.addMethodCallDelegate(instance, channel: channel)
